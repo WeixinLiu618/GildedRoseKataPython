@@ -11,6 +11,13 @@ class Item:
     def __repr__(self):
         return "%s, %s, %s" % (self.name, self.sell_in, self.quality)
 
+    def __eq__(self, other):
+        if isinstance(other, Item):
+            return (self.name == other.name and
+                    self.sell_in == other.sell_in and
+                    self.quality == other.quality)
+        return False
+
 
 class GildedRose(object):
 
@@ -47,3 +54,6 @@ class GildedRose(object):
                 else:
                     if item.quality < 50:
                         item.quality = item.quality + 1
+
+    def get_items_by_name(self, name):
+        return [item for item in self.items if item.name == name]
